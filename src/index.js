@@ -348,6 +348,9 @@ const VirtualList = Vue.component('virtual-list', {
         attrs: {
           role: 'group'
         },
+        props: {
+          ...this.extraProps
+        },
         style: wrapperStyle
       }, this.getRenderSlots(h)),
 
