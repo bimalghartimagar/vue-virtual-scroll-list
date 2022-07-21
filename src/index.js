@@ -63,15 +63,15 @@ const VirtualList = Vue.component('virtual-list', {
   activated () {
     // set back offset when awake from keep-alive
     this.scrollToOffset(this.virtual.offset)
-    
+
     if (this.pageMode) {
       document.addEventListener('scroll', this.onScroll, {
-        passive: false,
+        passive: false
       })
     }
   },
-  
-  deactivated() {
+
+  deactivated () {
     if (this.pageMode) {
       document.removeEventListener('scroll', this.onScroll)
     }
@@ -104,8 +104,8 @@ const VirtualList = Vue.component('virtual-list', {
 
   methods: {
     // get range of shown items
-    getRange: function getRange() {
-      return this.range;
+    getRange: function getRange () {
+      return this.range
     },
     // get item size by id
     getSize (id) {
