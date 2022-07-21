@@ -103,6 +103,10 @@ const VirtualList = Vue.component('virtual-list', {
   },
 
   methods: {
+    // get range of shown items
+    getRange: function getRange() {
+      return this.range;
+    },
     // get item size by id
     getSize (id) {
       return this.virtual.sizes.get(id)
