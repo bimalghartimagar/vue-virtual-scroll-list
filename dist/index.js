@@ -717,6 +717,7 @@
     activated: function activated() {
       // set back offset when awake from keep-alive
       this.scrollToOffset(this.virtual.offset);
+
       if (this.pageMode) {
         document.addEventListener('scroll', this.onScroll, {
           passive: false
