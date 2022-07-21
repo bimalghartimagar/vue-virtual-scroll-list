@@ -516,7 +516,7 @@
       "default": 'div'
     },
     wrapTag: {
-      type: String,
+      type: [Object, Function],
       "default": 'div'
     },
     wrapClass: {
@@ -699,9 +699,6 @@
     }
   });
 
-  /**
-   * virtual list default component
-   */
   var EVENT_TYPE = {
     ITEM: 'item_resize',
     SLOT: 'slot_resize'
@@ -745,9 +742,20 @@
         this.$on(EVENT_TYPE.SLOT, this.onSlotResized);
       }
     },
-    // set back offset when awake from keep-alive
     activated: function activated() {
+      // set back offset when awake from keep-alive
       this.scrollToOffset(this.virtual.offset);
+
+      if (this.pageMode) {
+        document.addEventListener('scroll', this.onScroll, {
+          passive: false
+        });
+      }
+    },
+    deactivated: function deactivated() {
+      if (this.pageMode) {
+        document.removeEventListener('scroll', this.onScroll);
+      }
     },
     mounted: function mounted() {
       // set position
@@ -773,6 +781,10 @@
       }
     },
     methods: {
+      // get range of shown items
+      getRange: function getRange() {
+        return this.range;
+      },
       // get item size by id
       getSize: function getSize(id) {
         return this.virtual.sizes.get(id);
@@ -1033,6 +1045,7 @@
         attrs: {
           role: 'group'
         },
+        props: _objectSpread2({}, this.extraProps),
         style: wrapperStyle
       }, this.getRenderSlots(h)), // footer slot
       footer ? h(Slot, {
