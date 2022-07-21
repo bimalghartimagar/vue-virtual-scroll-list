@@ -57,7 +57,7 @@ export const VirtualProps = {
     default: 'div'
   },
   wrapTag: {
-    type: String,
+    type: [Object, Function],
     default: 'div'
   },
   wrapClass: {
